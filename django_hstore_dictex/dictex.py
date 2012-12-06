@@ -1,5 +1,5 @@
 from django_hstore.hstore import DictionaryField
-from django_jsonformfieldex.field import JSONFormFieldEx
+from jsonformfieldex.field import JSONFormFieldEx
 
 class DictionaryFieldEx(DictionaryField):
     def __init__(self, *args, **kwargs):
@@ -9,10 +9,11 @@ class DictionaryFieldEx(DictionaryField):
         super(DictionaryFieldEx, self).__init__(self, *args, **kwargs)
 
     def formfield(self, **kwargs):
-        if "form_class" not in kwargs:
-            kwargs["form_class"] = JSONFormFieldEx
+        #if "form_class" not in kwargs:
+        #    kwargs["form_class"] = JSONFormFieldEx
 
         kwargs['fields'] = self.fields
         kwargs['allow_json_input'] = self.allow_json_input
 
-        return super(DictionaryField, self).formfield(**kwargs)
+        #return super(DictionaryFieldEx, self).formfield(**kwargs)
+        return JSONFormFieldEx(**kwargs)
