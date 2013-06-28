@@ -31,12 +31,15 @@ And `MyCustomerForm` renders like this:
 Usage
 ------
 
-Patched version of `DictionaryField` constructor takes two arguments itself. The original DictionaryField arguments still work.
+Patched version of `DictionaryField` constructor takes three arguments itself. The original DictionaryField arguments still work.
 
 * `fields`: a dict of fields  
 You can provide either field type or field instance for each field. `Fields` also supports SortedDict or [(k,v)...] to preserve ordering of fields.
 
 * `allow_json_input`: True|False  
-If True, it will render an additional textarea allowing user to enter arbitary json string (just like DictionaryField)
+If True, it will render an additional textarea allowing user to enter arbitary json string (just like jsonfield). The value in this field will be loaded to python dict and merged RECURSIVELY into the fielded values with priority.
 
 Note: when `fields` is empty, `allow_json_input` will be automatically set to True
+
+* `allow_empty`: True|False  
+If False, cleaned value dict will be filtered to keep only keys that have values.
